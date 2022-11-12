@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  php:
+    build:
+      context: .
+      dockerfile: ./docker-conf/php/dockerfile
+    container_name: php
+    volumes:
+      - './src/:/var/www/html/'
+    ports:
+      - '8080:80'
+    networks:
+      - main-network
+    command: /bin/sh -c 'cd /var/www/html && composer update && /usr/sbin/apachectl start && tail -f /var/log/apache2/*.log'
+  mysql:
+    build:
+      context: .
+      dockerfile: ./docker-conf/mysql/dockerfile
+    container_name: mysql
+    volumes:
+      - './docker-conf/mysql/data:/var/lib/mysql'
+      - './docker-conf/mysql/base/:/base/'
+    ports:
+      - '3306:3306'
+    networks:
+      - main-network
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+networks:
+  main-network:
+    driver: bridge
