@@ -14,15 +14,12 @@ class ArenaController extends Database
     public function insert($body)
     {
         $arena = new Arena((object) $body);
-        $id = $this->database->insert(
-            'arenas',
-            [
-                'name' => $arena->getName(),
-                'address' => $arena->getAddress(),
-                'country' => $arena->getCountry(),
-                'opening_at' => $arena->getOpeningAt()
-            ]
-        );
+        $id = $this->database->insert('arenas', [
+            'name' => $arena->getName(),
+            'address' => $arena->getAddress(),
+            'country' => $arena->getCountry(),
+            'opening_at' => $arena->getOpeningAt()
+        ]);
 
         return $id;
     }
@@ -41,7 +38,10 @@ class ArenaController extends Database
 
     public function getById($id)
     {
-        $data = $this->database->fetchRow('select * from arenas where id = :id', [':id' => $id]);
+        $data = $this->database->fetchRow(
+            'select * from arenas where id = :id',
+            [':id' => $id]
+        );
 
         return new Arena((object) $data);
     }

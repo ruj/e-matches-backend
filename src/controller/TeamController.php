@@ -14,21 +14,18 @@ class TeamController extends Database
     public function insert($data)
     {
         $team = new Team((object) $data);
-        $id = $this->database->insert(
-            'teams',
-            [
-                'name' => $team->getName(),
-                'icon' => $team->getIcon(),
-                'country' => $team->getCountry(),
-                'player_one' => $team->getPlayerOne(),
-                'player_two' => $team->getPlayerTwo(),
-                'player_three' => $team->getPlayerThree(),
-                'player_four' => $team->getPlayerFour(),
-                'player_five' => $team->getPlayerFive(),
-                'player_support' => $team->getPlayerSupport(),
-                'coach' => $team->getCoach()
-            ]
-        );
+        $id = $this->database->insert('teams', [
+            'name' => $team->getName(),
+            'icon' => $team->getIcon(),
+            'country' => $team->getCountry(),
+            'player_one' => $team->getPlayerOne(),
+            'player_two' => $team->getPlayerTwo(),
+            'player_three' => $team->getPlayerThree(),
+            'player_four' => $team->getPlayerFour(),
+            'player_five' => $team->getPlayerFive(),
+            'player_support' => $team->getPlayerSupport(),
+            'coach' => $team->getCoach()
+        ]);
 
         return $id;
     }
@@ -47,7 +44,10 @@ class TeamController extends Database
 
     public function getById($id)
     {
-        $data = $this->database->fetchRow('select * from teams where id = :id', [':id' => $id]);
+        $data = $this->database->fetchRow(
+            'select * from teams where id = :id',
+            [':id' => $id]
+        );
 
         return new Team((object) $data);
     }
@@ -96,6 +96,6 @@ class TeamController extends Database
                 teams t
             where
                 $where
-        ");
+        ") ?? [];
     }
 }

@@ -14,20 +14,17 @@ class GameController extends Database
     public function insert($data)
     {
         $game = new Game((object) $data);
-        $id = $this->database->insert(
-            'games',
-            [
-                'title' => $game->getTitle(),
-                'arena_id' => $game->getArenaId(),
-                'status' => $game->getStatus(), // P
-                'first_team_id' => $game->getFirstTeamId(),
-                'second_team_id' => $game->getSecondTeamId(),
-                'event_date' => $game->getEventDate(),
-                'start_in' => $game->getStartIn(),
-                'duration' => $game->getDuration(),
-                // 'winning_team_id' => $game->getWinningTeamId()
-            ]
-        );
+        $id = $this->database->insert('games', [
+            'title' => $game->getTitle(),
+            'arena_id' => $game->getArenaId(),
+            'status' => $game->getStatus(), // P
+            'first_team_id' => $game->getFirstTeamId(),
+            'second_team_id' => $game->getSecondTeamId(),
+            'event_date' => $game->getEventDate(),
+            'start_in' => $game->getStartIn(),
+            'duration' => $game->getDuration()
+            // 'winning_team_id' => $game->getWinningTeamId()
+        ]);
 
         return $id;
     }
@@ -46,7 +43,10 @@ class GameController extends Database
 
     public function getById($id)
     {
-        $data = $this->database->fetchRow('select * from games where id = :id', [':id' => $id]);
+        $data = $this->database->fetchRow(
+            'select * from games where id = :id',
+            [':id' => $id]
+        );
 
         return new Game((object) $data);
     }
@@ -83,7 +83,8 @@ class GameController extends Database
 
     public function getGameDetailsById($id)
     {
-        return $this->database->fetchRow("
+        return $this->database->fetchRow(
+            "
             select
                 `json`
             from (
