@@ -1,6 +1,6 @@
 <?php
 
-header("Access-Control-Allow-Origin: *");
+header('Access-Control-Allow-Origin: *');
 
 use Phroute\Phroute\RouteCollector;
 use Phroute\Phroute\Dispatcher;
@@ -94,7 +94,9 @@ $router->group(['prefix' => 'api'], function ($router) {
         // GET api/games/{id}/details
         $router->get('/{id}/details', function ($id) {
             $gameController = new GameController();
-            return json_encode(json_decode($gameController->getGameDetailsById($id)['json']));
+            return json_encode(
+                json_decode($gameController->getGameDetailsById($id)['json'])
+            );
         });
 
         // POST api/games/{id}
@@ -183,7 +185,10 @@ $router->group(['prefix' => 'api'], function ($router) {
 $dispatcher = new Dispatcher($router->getData());
 
 try {
-    $response = $dispatcher->dispatch($_SERVER['REQUEST_METHOD'], parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+    $response = $dispatcher->dispatch(
+        $_SERVER['REQUEST_METHOD'],
+        parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)
+    );
 } catch (HttpRouteNotFoundException $e) {
     http_response_code(404);
     echo json_encode(['message' => 'Not Found']);
