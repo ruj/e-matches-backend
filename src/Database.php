@@ -10,12 +10,7 @@ class Database
     function __construct()
     {
         try {
-            $pdo = new PDOConnector(
-                'mysql:3306',
-                'root',
-                'root',
-                'e_matches'
-            );
+            $pdo = new PDOConnector('mysql:3306', 'root', 'root', 'e_matches');
 
             $pdoConn = $pdo->connect('utf8', []);
             $this->database = new Mysql($pdoConn);
