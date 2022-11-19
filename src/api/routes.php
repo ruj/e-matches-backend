@@ -40,7 +40,9 @@ $router->group(['prefix' => 'api'], function ($router) {
         // GET api/arenas/{id}/games
         $router->get('/{id}/games', function ($id) {
             $arenaController = new ArenaController();
-            return json_encode($arenaController->getAllGamesById($id));
+            $where = "a.id = g.arena_id and a.id = $id";
+
+            return json_encode($arenaController->getAllGamesByWhere($where));
         });
 
         // POST api/arenas/{id}
@@ -141,13 +143,17 @@ $router->group(['prefix' => 'api'], function ($router) {
         // GET api/teams/{id}/games
         $router->get('/{id}/games', function ($id) {
             $teamController = new TeamController();
-            return json_encode($teamController->getAllPlayedGamesById($id));
+            $where = "(t.id = g.first_team_id or t.id = g.second_team_id) and t.id = $id";
+
+            return json_encode($teamController->getAllGamesByWhere($where));
         });
 
         // GET api/teams/{id}/wins
         $router->get('/{id}/wins', function ($id) {
             $teamController = new TeamController();
-            return json_encode($teamController->getAllGamesWonById($id));
+            $where = "t.id = g.winning_team_id and t.id = $id";
+
+            return json_encode($teamController->getAllGamesByWhere($where));
         });
 
         // POST api/teams/{id}

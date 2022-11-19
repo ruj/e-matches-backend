@@ -86,38 +86,17 @@ class TeamController extends Database
         return $this->database->delete('teams', ['id' => $id]);
     }
 
-    public function getAllPlayedGamesById($id)
+    public function getAllGamesByWhere($where)
     {
-        return $this->database->fetchRowMany('
+        return $this->database->fetchRowMany("
             select
                 g.*
             from
                 games g,
                 teams t
             where
-                (
-                    t.id = g.first_team_id
-                    or t.id = g.second_team_id
-                )
-                and t.id = :id
-            ',
-            ['id' => $id]
-        );
-    }
-
-    public function getAllGamesWonById($id)
-    {
-        return $this->database->fetchRowMany('
-            select
-                g.*
-            from
-                games g,
-                teams t
-            where
-                t.id = g.winning_team_id
-                and t.id = :id
-            ',
-            ['id' => $id]
+                $where
+            "
         );
     }
 }
