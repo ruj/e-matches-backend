@@ -89,6 +89,12 @@ $router->group(['prefix' => 'api'], function ($router) {
             return json_encode($gameController->getById($id));
         });
 
+        // GET api/games/{id}/details
+        $router->get('/{id}/details', function ($id) {
+            $gameController = new GameController();
+            return json_encode(json_decode($gameController->getGameDetailsById($id)['json']));
+        });
+
         // POST api/games/{id}
         $router->post('/{id}', function ($id) {
             $gameController = new GameController();
