@@ -95,8 +95,10 @@ class TeamController extends Database
                 games g,
                 teams t
             where
-                t.id = g.first_team_id
-                or t.id = g.second_team_id
+                (
+                    t.id = g.first_team_id
+                    or t.id = g.second_team_id
+                )
                 and t.id = :id
             ',
             ['id' => $id]
