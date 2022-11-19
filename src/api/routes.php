@@ -1,5 +1,7 @@
 <?php
 
+header("Access-Control-Allow-Origin: *");
+
 use Phroute\Phroute\RouteCollector;
 use Phroute\Phroute\Dispatcher;
 use Phroute\Phroute\RouteParser;
