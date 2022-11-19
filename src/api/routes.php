@@ -138,6 +138,18 @@ $router->group(['prefix' => 'api'], function ($router) {
             return json_encode($teamController->getById($id));
         });
 
+        // GET api/teams/{id}/games
+        $router->get('/{id}/games', function ($id) {
+            $teamController = new TeamController();
+            return json_encode($teamController->getAllPlayedGamesById($id));
+        });
+
+        // GET api/teams/{id}/wins
+        $router->get('/{id}/wins', function ($id) {
+            $teamController = new TeamController();
+            return json_encode($teamController->getAllGamesWonById($id));
+        });
+
         // POST api/teams/{id}
         $router->post('/{id}', function ($id) {
             $teamController = new TeamController();
