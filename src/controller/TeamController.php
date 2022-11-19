@@ -96,7 +96,6 @@ class TeamController extends Database
                 teams t
             where
                 $where
-            "
-        );
+        ");
     }
 }
