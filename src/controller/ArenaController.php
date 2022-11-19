@@ -71,4 +71,20 @@ class ArenaController extends Database
     {
         return $this->database->delete('arenas', ['id' => $id]);
     }
+
+    public function getAllGamesById($id)
+    {
+        return $this->database->fetchRowMany('
+            select
+                g.*
+            from
+                games g,
+                arenas a
+            where
+                a.id = g.arena_id
+                and a.id = :id
+            ',
+            ['id' => $id]
+        );
+    }
 }

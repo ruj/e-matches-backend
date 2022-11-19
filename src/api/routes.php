@@ -37,6 +37,12 @@ $router->group(['prefix' => 'api'], function ($router) {
             return json_encode($arenaController->getById($id));
         });
 
+        // GET api/arenas/{id}/games
+        $router->get('/{id}/games', function ($id) {
+            $arenaController = new ArenaController();
+            return json_encode($arenaController->getAllGamesById($id));
+        });
+
         // POST api/arenas/{id}
         $router->post('/{id}', function ($id) {
             $arenaController = new ArenaController();
