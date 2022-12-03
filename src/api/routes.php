@@ -1,6 +1,7 @@
 <?php
 
 header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json');
 
 use Phroute\Phroute\RouteCollector;
 use Phroute\Phroute\Dispatcher;
