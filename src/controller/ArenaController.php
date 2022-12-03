@@ -82,6 +82,6 @@ class ArenaController extends Database
                 arenas a
             where
                 $where
-        ");
+        ") ?? [];
     }
 }
