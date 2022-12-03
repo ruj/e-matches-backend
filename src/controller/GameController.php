@@ -17,7 +17,7 @@ class GameController extends Database
         $id = $this->database->insert('games', [
             'title' => $game->getTitle(),
             'arena_id' => $game->getArenaId(),
-            'status' => $game->getStatus(), // P
+            // 'status' => $game->getStatus(), // P
             'first_team_id' => $game->getFirstTeamId(),
             'second_team_id' => $game->getSecondTeamId(),
             'event_date' => $game->getEventDate(),
