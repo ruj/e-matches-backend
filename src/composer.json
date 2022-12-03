@@ -2,11 +2,5 @@
     "require": {
         "phroute/phroute": "^2.2",
         "simplon/mysql": "^2.2"
-    },
-    "autoload": {
-        "psr-4": {
-            "Controller\\": "controller/",
-            "Model\\": "model/"
-        }
     }
 }
